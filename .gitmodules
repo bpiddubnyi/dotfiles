@@ -1,0 +1,27 @@
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule ".vim/bundle/clang_complete"]
+	path = .vim/bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete
+[submodule ".vim/bundle/indentLine"]
+	path = .vim/bundle/indentLine
+	url = https://github.com/Yggdroot/indentLine
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
+[submodule ".vim/bundle/rust.vim"]
+	path = .vim/bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim
+[submodule ".vim/bundle/vim-racer"]
+	path = .vim/bundle/vim-racer
+	url = https://github.com/racer-rust/vim-racer
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = https://github.com/bpiddubnyi/vim-colors-solarized
+[submodule "install/vimpager/src"]
+	path = install/vimpager/src
+	url = https://github.com/rkitover/vimpager
+[submodule "install/rust/racer/src"]
+	path = install/rust/racer/src
+	url = https://github.com/phildawes/racer.git

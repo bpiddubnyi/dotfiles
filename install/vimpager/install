@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo apt-get install -y pandoc sharutils
+make -C src PREFIX=$LOCAL_PREFIX install

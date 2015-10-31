@@ -1,0 +1,1 @@
+/home/zhu/install/src/vim-pathogen/autoload/pathogen.vim

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd src
+
+oldpath=$PATH
+old_ld_path=$LD_LIBRARY_PATH
+
+export PATH=$PATH:$LOCAL_PREFIX/bin
+export LD_LIBRARY_PATH=$LOCAL_PREFIX/lib
+
+cargo build --release
+
+export PATH=$oldpath
+export LD_LIBRARY_PATH=$old_ld_path
+
+cp ./target/release/racer $LOCAL_PREFIX/bin

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Configuration
+export LOCAL_PREFIX=$HOME/.local
+
+dotfiles_dir=$HOME/.dotfiles
+backup_dir=$dotfiles_dir/backup-$(date +%d-%m-%Y-%H-%M-%S)/backup
+
+if [ ! -d $dotfiles_dir ]; then
+	git clone --recursive https://github.com/bpiddubnyi/dotfiles.git $dotfiles_dir
+fi
+
+cd $dotfiles_dir
+
+mkdir -p $backup_dir
+
+for dotfile in .*; do
+	case $dotfile in
+		. | .. | .git | .gitignore | .gitmodules)
+			continue
+			;;
+	esac
+
+	if [ -e $HOME/$dotfile ]; then
+		bak=$backup_dir/$dotfile
+		echo "$HOME/$dotfile => $bak"
+		mv $HOME/$dotfile $backup_dir
+	fi
+
+	echo "$dotfiles_dir/$dotfile -> $HOME/$dotfile"
+	ln -s $dotfiles_dir/$dotfile $HOME/$dotfile
+done
+
+shopt -s globstar
+
+for dir in install/*; do
+	for entry in $dir/**; do
+		if [ ! -d $entry ]; then
+			continue
+		fi
+
+		case $entry in
+			*src* | . | .. )
+				continue
+				;;
+		esac
+
+		echo Installing $(basename $entry)
+		
+		if [ -e $entry/install ]; then
+			pushd $entry
+			./install
+			popd
+		fi
+	done
+done

@@ -1,0 +1,8 @@
+[user]
+	email = zhu@zhu.org.ua
+	name = Borys Piddubnyi
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

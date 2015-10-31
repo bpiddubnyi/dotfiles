@@ -1,0 +1,9 @@
+execute pathogen#infect()
+set nonu
+let g:solarized_termtrans=1
+colorscheme solarized
+let g:vimpager_passthrough = 0
+set wrapscan
+
+" vim: set ft=vim :
+"
