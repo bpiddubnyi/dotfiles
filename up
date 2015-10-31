@@ -12,7 +12,15 @@ fi
 
 cd $dotfiles_dir
 
+set_shell() {
+	[ -z "$shell" ] && return
+
+	[ $(basename "$SHELL") != "zsh" ] && chsh -s /bin/zsh
+}
+
 symlink() {
+	[ -z "$symlink" ] && return
+
 	mkdir -p $backup_dir
 
 	for dotfile in .*; do
@@ -35,6 +43,8 @@ symlink() {
 
 install()
 {
+	[ -z "$install" ] && return
+
 	shopt -s globstar
 
 	for dir in install/*; do
@@ -61,6 +71,8 @@ install()
 }
 
 install_packages() {
+	[ -z "$packages" ] && return
+
 	packages=()
 	while read line; do
 		case $line in
@@ -74,6 +86,69 @@ install_packages() {
 	sudo apt-get install -y ${packages[@]}
 }
 
+show_help() {
+	echo "Usage: ~/.dotfiles/up [OPTION]"
+	echo "Options:"
+	echo "  -i, --install    install additional stuff from ~/.dotfiles/install"
+	echo "  -p, --packages   install packages listed in ~/.dotfiles/packages"
+	echo "  -s, --symlink    symlink config files to your home directory, enabled"
+	echo "                     by default"
+	echo "  -z, --shell      change shell to /bin/zsh, enabled by deafult"
+	echo "  -a, --all        all options listed above"
+	echo "  -h, --help       display this help and exit"
+	exit $1
+}
+
+parse_cmd_args() {
+	args_num=$#
+	while [[ $# > 0 ]]; do
+		key=$1
+		case $key in
+			-i|--install)
+				install=true
+				shift
+				;;
+			-p|--packages)
+				packages=true
+				shift
+				;;
+			-s|--symlink)
+				symlink=true
+				shift
+				;;
+			-a|--all)
+				install=true
+				packages=true
+				symlink=true
+				shift
+				;;
+			-z|--shell)
+				shell=true
+				shift
+				;;
+			-h|--help)
+				show_help 0
+				;;
+			*)
+				echo "Unknow option: $key"
+				show_help 1
+				;;
+		esac
+	done
+
+	if [[ "$args_num" == 0 ]]; then
+		symlink=true
+		shell=true
+	fi
+	
+	[ ! -z "$install" ] && echo  "* going to install additional packages"
+	[ ! -z "$packages" ] && echo "* going to install system packages"
+	[ ! -z "$symlink" ] && echo  "* going to symlink config files to home directory"
+	[ ! -z "$shell" ] && echo    "* going to change shell to /bin/zsh"
+}
+
+parse_cmd_args "$@"
 install_packages
 symlink
 install
+set_shell
