@@ -12,45 +12,68 @@ fi
 
 cd $dotfiles_dir
 
-mkdir -p $backup_dir
+symlink() {
+	mkdir -p $backup_dir
 
-for dotfile in .*; do
-	case $dotfile in
-		. | .. | .git | .gitignore | .gitmodules)
-			continue
-			;;
-	esac
-
-	if [ -e $HOME/$dotfile ]; then
-		bak=$backup_dir/$dotfile
-		echo "$HOME/$dotfile => $bak"
-		mv $HOME/$dotfile $backup_dir
-	fi
-
-	echo "$dotfiles_dir/$dotfile -> $HOME/$dotfile"
-	ln -s $dotfiles_dir/$dotfile $HOME/$dotfile
-done
-
-shopt -s globstar
-
-for dir in install/*; do
-	for entry in $dir/**; do
-		if [ ! -d $entry ]; then
-			continue
-		fi
-
-		case $entry in
-			*src* | . | .. )
+	for dotfile in .*; do
+		case $dotfile in
+			. | .. | .git | .gitignore | .gitmodules)
 				continue
 				;;
 		esac
 
-		echo Installing $(basename $entry)
-		
-		if [ -e $entry/install ]; then
-			pushd $entry
-			./install
-			popd
+		if [ -e $HOME/$dotfile ]; then
+			bak=$backup_dir/$dotfile
+			echo "$HOME/$dotfile => $bak"
+			mv $HOME/$dotfile $backup_dir
 		fi
+
+		echo "$dotfiles_dir/$dotfile -> $HOME/$dotfile"
+		ln -s $dotfiles_dir/$dotfile $HOME/$dotfile
 	done
-done
+}
+
+install()
+{
+	shopt -s globstar
+
+	for dir in install/*; do
+		for entry in $dir/**; do
+			if [ ! -d $entry ]; then
+				continue
+			fi
+
+			case $entry in
+				*src* | . | .. )
+					continue
+					;;
+			esac
+
+			echo Installing $(basename $entry)
+			
+			if [ -e $entry/install ]; then
+				pushd $entry
+				./install
+				popd
+			fi
+		done
+	done
+}
+
+install_packages() {
+	packages=()
+	while read line; do
+		case $line in
+			\#* )
+				continue
+				;;
+		esac
+		packages+=($line)
+	done < ./packages
+
+	sudo apt-get install -y ${packages[@]}
+}
+
+install_packages
+symlink
+install

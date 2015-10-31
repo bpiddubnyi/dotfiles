@@ -1,0 +1,46 @@
+# Dev tools
+autoconf
+clang
+cmake
+exuberant-ctags
+gcc-doc
+glibc-doc
+glibc-doc-reference
+git
+golang
+ipython
+libclang-dev
+libtool
+python-qpid-proton
+python-redis
+qemu
+qemu-system
+qemu-user
+tig
+valgrind
+vim
+
+# Environment
+android-tools-adb
+android-tools-fastboot
+htop
+mc
+p7zip
+p7zip-rar
+tmux
+powertop
+unrar
+zsh
+
+# Desktop
+clementine
+gimp
+gimp-data-extras
+gimp-help-en
+gimp-plugin-registry
+gtk2-engines-murrine:i386
+gtk2-engines-pixbuf:i386
+icedtea-plugin
+virtualbox
+virtualbox-guest-additions-iso
+vlc
