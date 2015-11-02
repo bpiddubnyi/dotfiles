@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pushd src
+
+./autogen.sh
+./configure --program-suffix=-2.5 --prefix=$LOCAL_PREFIX
+make -j5
+make install
+
+popd

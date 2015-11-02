@@ -25,3 +25,6 @@
 [submodule "install/rust/racer/src"]
 	path = install/rust/racer/src
 	url = https://github.com/phildawes/racer.git
+[submodule "install/protobuf-2.5/src"]
+	path = install/protobuf-2.5/src
+	url = https://github.com/google/protobuf
