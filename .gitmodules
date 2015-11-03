@@ -28,3 +28,6 @@
 [submodule "install/protobuf-2.5/src"]
 	path = install/protobuf-2.5/src
 	url = https://github.com/google/protobuf
+[submodule ".vim/bundle/vim-systemd-syntax"]
+	path = .vim/bundle/vim-systemd-syntax
+	url = https://github.com/Matt-Deacalion/vim-systemd-syntax
