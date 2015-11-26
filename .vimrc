@@ -13,6 +13,5 @@ colorscheme solarized
 filetype indent plugin on
 
 let mapleader=","
-let g:clang_library_path="/usr/lib/llvm-3.5/lib/libclang-3.5.so"
+"let g:clang_library_path="/usr/lib/llvm-3.7/lib/libclang-3.7.so"
 
-let g:jedi#show_call_signatures=2

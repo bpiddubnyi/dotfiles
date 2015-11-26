@@ -107,3 +107,6 @@ alias cat=vimcat
 alias zcat=vimcat
 
 export RUST_SRC_PATH=$LOCAL_PREFIX/src/rust/src
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin
