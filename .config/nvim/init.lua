@@ -10,6 +10,7 @@ o.complete = 'o,.,w,b'
 o.completeopt = 'menuone,noselect,fuzzy,popup,nearest'
 o.cursorline = true
 vim.opt.shortmess:append('c')
+vim.g.mapleader = " "
 
 require("plugins")
 
